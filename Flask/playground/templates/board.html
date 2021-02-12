@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playground</title>
+</head>
+<style>
+    .container{
+        text-align: center;
+    }
+
+    
+    .red{
+        height: 50px;
+        width: 50px;
+        background-color: {{blockColor1}};
+        margin: 2px;
+        display: inline-block;
+    }
+    .black{
+        height: 50px;
+        width: 50px;
+        background-color:{{blockColor2}};
+        margin: 2px;
+        display: inline-block;
+    }
+</style>
+<body>
+    <div class="container">
+        <h1>Welcome to the playground!</h1>
+        {% for j in range( height ) %}
+            <div class="row">
+            {% for i in range( width ) %}
+                {% if j%2 == 0 and i%2 ==0 %}
+                <div class="red"></div>
+                {% elif j%2==0 and i%2!=0 %}
+                <div class="black"></div>
+                {% endif %}
+                {% if j%2 != 0 and i%2 !=0 %}
+                <div class="red"></div>
+                {% elif j%2!=0 and i%2==0 %}
+                <div class="black"></div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
