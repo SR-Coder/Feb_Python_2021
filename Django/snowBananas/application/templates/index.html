@@ -8,12 +8,12 @@
 </head>
 <body>
     <h1>Welcome Please register or login</h1>
-    <form action="/new" method="POST">
+    <form action="/login" method="POST">
         {% csrf_token %}
-        <label for="fName">First Name</label>
-        <input type="text", name='fName'>
         <label for="email">Email</label>
         <input type="text", name='email'>
+        <label for="pWord">Password</label>
+        <input type="password" name="pWord">
         <button type="submit">Submit</button>
 
 

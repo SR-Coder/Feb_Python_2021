@@ -14,3 +14,6 @@ for (let j = 0 ; j < 10; j++){
 for i in list:
     print i
 ```
+
+SELECT column1, column2, ...
+FROM table_name;
