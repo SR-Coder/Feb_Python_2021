@@ -1,0 +1,43 @@
+body{
+    background-color: aquamarine;
+}
+.container{
+    text-align: center;
+}
+
+.winner{
+    background-color: green;
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    
+}
+.tooHigh{
+    background-color: red;
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.tooLow{
+    background-color: red;
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.button{
+    border:1px solid gray;
+    padding:5px;
+    background-color:lightgray;
+}
