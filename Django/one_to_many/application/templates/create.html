@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Some Stuff</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Create Some Stuff!!</h1>
+        <div class="userC border p-2">
+            <h3>Create a User</h3>
+            <form action="/create/newUser" method="post">
+                {% csrf_token %}
+                <input class="form-control" type="text" name="fName" placeholder="First Name">
+                <input class="form-control" type="text" name="lName" placeholder="Last Name">
+                <input class="form-control" type="text" name="email" placeholder="Email">
+                <input class="form-control" type="text" name="hair_color" placeholder="Hair Color">
+                <input class="btn btn-primary" type="submit">
+            </form>
+        </div>
+        <div class="nanaC border p-2">
+            <h3>Create a Snow Banana!</h3>
+            <form action="/create/newNanna" method="post">
+                {% csrf_token %}
+                <input class="form-control" type="text" name="color" placeholder="Color">
+                <input class="form-control" type="text" name="ripeness" placeholder="Ripeness">
+                <input class="form-control" type="text" name="age" placeholder="Age">
+                <select class="form-control" name="user" >
+                    {% for user in userList %}
+                    <option value="{{ user.id }}">{{ user.fname }}</option>
+                    {% endfor %}
+                </select>
+                <input class="btn btn-primary" type="submit">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

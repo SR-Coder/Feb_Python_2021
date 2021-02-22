@@ -15,7 +15,8 @@ def dispDashboard(request):
     uid = request.session.get('userID')
     if uid is not None:
         context = {
-            'nameList': ['Kelly', 'Billy', 'Brenda']
+            'nameList': ['Kelly', 'Billy', 'Brenda'],
+            'thisUser': User.objects.get(id=uid)
         }
         return render(request, "dashboard.html", context)
     else:
@@ -45,6 +46,10 @@ def login(request):
     else:
         print('user does not exist')
     return redirect('/')
+
+def newUser(request):
+
+    return redirect('/dashboard')
 
 def logout(request):
     del request.session['myEmail']

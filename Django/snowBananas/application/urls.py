@@ -12,5 +12,6 @@ urlpatterns = [
     # ACTION ROUTES
     path('login', views.login),
     path('logout', views.logout),
+    path('newUser', views.newUser),
 
 ]
