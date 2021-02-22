@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse
-from . models import User
+from . models import User, SnowBanana
 
 # Create your views here.
 # RENDER METHODS
@@ -13,9 +13,11 @@ def dispLogin(request):
 def dispDashboard(request):
     # uid = request.session['myEmail']
     uid = request.session.get('userID')
+    thisUser = User.objects.get(id=uid)
     if uid is not None:
         context = {
-            'nameList': ['Kelly', 'Billy', 'Brenda'],
+            'sbananas': SnowBanana.objects.all(),
+            'myBananas':SnowBanana.objects.filter(user=thisUser),
             'thisUser': User.objects.get(id=uid)
         }
         return render(request, "dashboard.html", context)
@@ -28,6 +30,9 @@ def dispGuest(request, name):
         'theAge': 129
     }
     return render(request, 'guest.html', context)
+
+def dispCreate(request):
+    return render(request, 'create.html')
 
 
 # ACTION METHODS
@@ -48,11 +53,32 @@ def login(request):
     return redirect('/')
 
 def newUser(request):
+    new_user = User.objects.create(
+        first_name = request.POST['fName'],
+        last_name = request.POST['lName'],
+        email = request.POST['email'],
+        password = request.POST['password'],
 
+    )
+    request.session['userID'] = new_user.id
     return redirect('/dashboard')
 
 def logout(request):
-    del request.session['myEmail']
     request.session.clear()
     return redirect('/')
 
+def createNewNanna(request):
+    newNanna = SnowBanana.objects.create(
+        color=request.POST['color'],
+        ripeness=request.POST['ripeness'],
+        age=request.POST['age'],
+        user= User.objects.get(id=request.session['userID'])
+    )
+    return redirect('/dashboard')
+
+def likeANanna(request, nannaID):
+    bananaToLike = SnowBanana.objects.get(id=nannaID)
+    thisUser = User.objects.get(id=request.session['userID'])
+    bananaToLike.users_who_like.add(thisUser)
+    print(f'you liked the banana with id = {nannaID}')
+    return redirect('/dashboard')

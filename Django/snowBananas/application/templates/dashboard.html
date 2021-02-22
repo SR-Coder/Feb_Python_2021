@@ -12,15 +12,23 @@
 </head>
 <body>
     <h1>Congrats {{ thisUser.first_name }} on making it to the Snow Bananas Page</h1>
-    <h4><a href="/logout">Logout</a></h4>
+    <h4><a class="btn btn-danger" href="/logout">Logout</a> <a class="btn btn-primary" href="/create">Create New</a></h4>
+    <h3>All Bananas</h3>
     <ul>
-        {% for name in nameList %}
+        {% for nanna in sbananas %}
+        {% if nanna.user.id != request.session.userID %}
         <li>
-            {% if name == 'Billy' %}
-            <h3>{{ name }}</h3>
-            {% else %}
-            <a href="/guest/{{name}}">{{name}}</a>
-            {% endif %}
+            {{nanna.color}} , {{nanna.user.first_name}} |  <a href="/like/{{ nanna.id }}" class="btn btn-success">Like</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+    <h3>Bananas i've Liked</h3>
+    <ul>
+        {% for sb in thisUser.likedSnowBananas.all %}
+
+        <li>
+            {{sb.color}} , {{sb.user.first_name}}
         </li>
         {% endfor %}
     </ul>

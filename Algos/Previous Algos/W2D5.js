@@ -29,7 +29,19 @@ const expected4 = "orldHello W";
  *    right.
  * @return {string} The string rotated by the given amount.
  */
-function rotateStr(str, n) {}
+function rotateStr(str, n) {
+  let res = "";
+  let rotatedSubStr = "";
+
+  for (let i = 0; i < str.length; i++) {
+    if (i >= str.length - n) {
+      rotatedSubStr += str[i];
+    } else {
+      res += str[i];
+    }
+  }
+  return rotatedSubStr + res;
+} 
 
 module.exports = { rotateStr };
 
@@ -58,7 +70,12 @@ const expected2 = false;
  * @param {string} s2
  * @return {boolean} Whether the second string is a rotated version of the 1st.
  */
-function isRotation(s1, s2) {}
+function isRotation(s1, s2) {
+  if (s1.length !== s2.length || s1 === s2) {
+    return false;
+  }
+  return (s1 + s1).includes(s2);
+}
 
 module.exports = { isRotation };
 

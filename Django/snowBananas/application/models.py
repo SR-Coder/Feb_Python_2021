@@ -9,7 +9,8 @@ class User(models.Model):
     password = models.CharField(max_length=60)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
+    #snowBananas
+    #likedSnowBananas
     # string that is returned when we want to view the object
     def __str__(self):
         s = '\n'
@@ -18,3 +19,11 @@ class User(models.Model):
         s += f'email: {self.email}\n'
         return s
     
+class SnowBanana(models.Model):
+    color = models.CharField(max_length=255)
+    ripeness = models.CharField(max_length=255)
+    age = models.IntegerField()
+    user = models.ForeignKey(User, related_name="snowbananas", on_delete=models.CASCADE)
+    users_who_like = models.ManyToManyField(User, related_name='likedSnowBananas')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

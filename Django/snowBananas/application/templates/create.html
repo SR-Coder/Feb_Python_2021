@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Snow Banana Page</title>
+</head>
+<body>
+    <div class="p-4 border">        
+        <form action="/create/newNanna" method="post">
+        {% csrf_token %}
+        <input type="text" name="color" placeholder="Snow Banana Color" class="form-control">
+        <input type="text" name="ripeness" placeholder="Snow Banana Ripe" class="form-control">
+        <input type="text" name="age" placeholder="Snow Banana age" class="form-control">
+        <input class="btn btn-success" type="submit" value="submit">
+        </form>
+    </div>
+</body>
+</html>

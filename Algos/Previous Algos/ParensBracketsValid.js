@@ -72,7 +72,61 @@ const expected3 = false;
  * @param {string} str
  * @return {boolean} Whether the given strings braces are valid.
  */
-function bracesValid(str) {}
+/**
+ * - Time: O(n) linear.
+ * - Space: O(n) linear.
+ */
+function bracesValid(str) {
+  const stack = [];
+  const closeToOpen = { ")": "(", "}": "{", "]": "[" };
+
+  for (let i = 0; i < str.length; i++) {
+    switch (str[i]) {
+      case "(":
+      case "{":
+      case "[":
+        stack.push(str[i]);
+        break;
+      case ")":
+      case "}":
+      case "]":
+        if (closeToOpen[str[i]] === stack[stack.length - 1]) {
+          stack.pop();
+        } else {
+          return false;
+        }
+        break;
+      default:
+        break;
+    }
+  }
+  return stack.length === 0;
+}
+
+/**
+ * - Time: O(n * m) where n = str.length and m = opens.length,
+ *    since opens.length is constant length of 3 -> O(3n) -> O(n) linear.
+ * - Space: O(n) linear.
+ */
+function bracesValid2(str) {
+  const stack = [];
+  const opens = "({[";
+  const closeToOpen = { ")": "(", "}": "{", "]": "[" };
+
+  for (let i = 0; i < str.length; i++) {
+    if (opens.includes(str[i])) {
+      stack.push(str[i]);
+    } else if (str[i] in closeToOpen) {
+      if (closeToOpen[str[i]] === stack[stack.length - 1]) {
+        stack.pop();
+      } else {
+        return false;
+      }
+    }
+  }
+  return stack.length === 0;
+}
+
 
 module.exports = { bracesValid };
 

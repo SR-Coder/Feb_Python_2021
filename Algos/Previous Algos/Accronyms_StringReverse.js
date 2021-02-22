@@ -1,4 +1,4 @@
-* 
+/* 
   Parens Valid
 
 	Given an str that has parenthesis in it
@@ -52,7 +52,15 @@ const expected2 = "LFNYISN";
  * @param {string} str A string to be turned into an acronym.
  * @return {string} The given str converted into an acronym.
  */
-function acronymize(str) {}
+function acronymizeWithSplit(wordsStr) {
+  let acronym = "";
+  const wordsArr = wordsStr.split(" ");
+
+  for (const word of wordsArr) {
+    acronym += word[0].toUpperCase();
+  }
+  return acronym;
+}
 
 module.exports = { acronymize };
 
@@ -80,6 +88,14 @@ const expected2 = "god";
  * @param {string} str String to be reversed.
  * @return {string} The given str reversed.
  */
-function reverseString(str) {}
+function reverseString(str) {
+  let reversed = "";
+
+  for (let i = str.length - 1; i >= 0; i--) {
+    reversed += str[i];
+  }
+
+  return reversed;
+}
 
 module.exports = { reverseString };
