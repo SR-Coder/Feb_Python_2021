@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{book_detail.title}}</title>
+</head>
+<body>
+    <div class="container">
+        <a class="btn btn-primary" href="/">Home</a>
+        <h1>{{book_detail.title}}</h1>
+        <h3>ID: {{book_detail.id}}</h3>
+        <p>Description: {{book_detail.description}}</p>
+        <h2>Authors</h2>
+        <ul>
+            {% for author in book_detail.authors.all %}
+            <li>{{author.first_name}} {{author.last_name}}</li>
+            {% endfor %}
+        </ul>
+        <form action="/addAuthorToBook" method="post">
+            {% csrf_token %}
+            <select class="form-control-small" name="author">
+                {% for author in all_authors %}
+                    {% if book_detail not in author.books.all  %}
+                        <option value="{{author.id}}">{{author.first_name}} {{author.last_name}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <input type="hidden" name="book_id" value="{{book_detail.id}}">
+            <input class="btn btn-primary" type="submit">
+        </form>
+    </div>
+</body>
+</html>
