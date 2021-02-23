@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect, HttpResponse
 from . models import User, SnowBanana
+import bcrypt
+from django.contrib import messages
+from django.contrib.messages import get_messages
 
 # Create your views here.
 # RENDER METHODS
@@ -43,7 +46,8 @@ def login(request):
         email = request.POST['email']
     ).first()
     if existingUser is not None:
-        if existingUser.password == request.POST['pWord']:
+        if bcrypt.checkpw(request.POST['pWord'].encode(), existingUser.password.encode()): # evaluates to either True or False
+        # if existingUser.password == request.POST['pWord']:
             request.session['userID'] = existingUser.id
             return redirect('/dashboard')
         else:
@@ -53,11 +57,30 @@ def login(request):
     return redirect('/')
 
 def newUser(request):
+
+    #adding some validations
+    # if len(request.POST['fName'])<2:
+    #     messages.error(request, 'First name must be at least 2 characters.')
+    # if len(request.POST['lName'])<2:
+    #     messages.error(request, 'Last name must be at least 2 characters.')
+
+    # error_messages = messages.get_messages(request)
+    # error_messages.used = False
+
+    errors = User.objects.basic_validator(request.POST)
+    print(errors)
+    if len(errors)>0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect('/')
+
+    hashed_pw = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt()).decode()
+    print(hashed_pw)
     new_user = User.objects.create(
         first_name = request.POST['fName'],
         last_name = request.POST['lName'],
         email = request.POST['email'],
-        password = request.POST['password'],
+        password = hashed_pw
 
     )
     request.session['userID'] = new_user.id

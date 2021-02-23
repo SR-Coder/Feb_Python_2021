@@ -34,46 +34,53 @@ const expected4 = 4;
  * @param {number} searchNum
  * @return {boolean} Whether the given num exists in the given array.
  */
-function binarySearch(sortedNums, searchNum) {}
+function binarySearch(sortedNums, searchNum) {
+  let leftIdx = 0;
+  let rightIdx = sortedNums.length - 1;
 
-module.exports = { binarySearch };
+  while (leftIdx <= rightIdx) {
+    let midIdx = Math.floor(rightIdx - leftIdx / 2);
 
-/*****************************************************************************/
+    if (sortedNums[midIdx] === searchNum) {
+      return true;
+      // Bonus:
+      // return countAdjacentDupes(sortedNums, midIdx);
+    }
 
-  
-/* 
-  Given two arrays, interleave them into one new array.
-  The arrays may be different lengths. The extra items should be added to the
-  back of the new array.
-*/
+    if (searchNum < sortedNums[midIdx]) {
+      rightIdx = midIdx - 1;
+    } else {
+      leftIdx = midIdx + 1;
+    }
+  }
+  return false;
+  // Bonus:
+  // return 0;
+}
 
-const arrA1 = [1, 2, 3];
-const arrB1 = ["a", "b", "c"];
-const expected1 = [1, "a", 2, "b", 3, "c"];
+function countAdjacentDupes(arr, idx) {
+  let count = 1;
+  let elem = arr[idx];
 
-const arrA2 = [1, 3];
-const arrB2 = [2, 4, 6, 8];
-const expected2 = [1, 2, 3, 4, 6, 8];
+  if (idx < 0 || idx >= arr.length) {
+    return 0;
+  }
 
-const arrA3 = [1, 3, 5, 7];
-const arrB3 = [2, 4];
-const expected3 = [1, 2, 3, 4, 5, 7];
+  for (
+    let leftIdx = idx - 1, rightIdx = idx + 1;
+    leftIdx >= 0 || rightIdx <= arr.length - 1;
+    leftIdx--, rightIdx++
+  ) {
+    const leftElem = arr[leftIdx];
+    const rightElem = arr[rightIdx];
 
-const arrA4 = [];
-const arrB4 = [42, 0, 6];
-const expected4 = [42, 0, 6];
+    if (leftElem === elem) {
+      count++;
+    }
 
-/**
- * Interleaves two arrays into a new array. Interleaving means alternating
- * the items starting from the first array.
- * - Time: O(?).
- * - Space: O(?).
- * @param {Array<any>} arr1
- * @param {Array<any>} arr2
- * @return {Array<any>} A new array of interleaved items.
- */
-function interleaveArrays(arr1, arr2) {}
-
-module.exports = { interleaveArrays };
-
-/*****************************************************************************/
+    if (rightElem === elem) {
+      count++;
+    }
+  }
+  return count;
+}

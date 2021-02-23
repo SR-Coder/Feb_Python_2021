@@ -22,6 +22,12 @@
             </form>
         </div>
         <div class="p-5 border">
+            
+            <ul>
+                {% for message in messages %}
+                <li class="warning">{{message}}</li>
+                {% endfor %}
+            </ul>
             <form action="/newUser" method="post">
                 {% csrf_token %}
                 <input class="form-control" type="text" name="fName" placeholder="First Name">
