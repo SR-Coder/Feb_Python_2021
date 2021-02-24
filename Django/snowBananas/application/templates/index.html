@@ -23,17 +23,48 @@
         </div>
         <div class="p-5 border">
             
-            <ul>
-                {% for message in messages %}
-                <li class="warning">{{message}}</li>
-                {% endfor %}
-            </ul>
             <form action="/newUser" method="post">
                 {% csrf_token %}
+                <!-- message for fname only -->
+                <ul>
+                    {% for message in messages %}
+                        {% if message.extra_tags == 'fName' %}
+                            <li class="text-danger">{{message}} </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
                 <input class="form-control" type="text" name="fName" placeholder="First Name">
+                <ul>
+                    {% for message in messages %}
+                        {% if message.extra_tags == 'lName' %}
+                            <li class="text-danger">{{message}} </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
                 <input class="form-control" type="text" name="lName" placeholder="Last Name">
+                <ul>
+                    {% for message in messages %}
+                        {% if message.extra_tags == 'email' %}
+                            <li class="text-danger">{{message}} </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
                 <input class="form-control" type="text" name="email" placeholder="Email">
+                <ul>
+                    {% for message in messages %}
+                        {% if message.extra_tags == 'password' %}
+                            <li class="text-danger">{{message}} </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
                 <input class="form-control" type="password" name="password" placeholder="Password">
+                <ul>
+                    {% for message in messages %}
+                        {% if message.extra_tags == 'chkPassword' %}
+                            <li class="text-danger">{{message}} </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
                 <input class="form-control" type="password" name="chkPassword" placeholder="Confirm Password">
                 <input class="btn btn-primary" type="submit" value="Register">
             </form>

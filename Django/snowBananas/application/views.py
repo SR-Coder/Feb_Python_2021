@@ -71,7 +71,7 @@ def newUser(request):
     print(errors)
     if len(errors)>0:
         for key, value in errors.items():
-            messages.error(request, value)
+            messages.error(request, value, extra_tags=key)
         return redirect('/')
 
     hashed_pw = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt()).decode()

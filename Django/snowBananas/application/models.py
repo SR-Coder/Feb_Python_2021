@@ -22,7 +22,7 @@ class UserManager(models.Manager):
             errors['chkPassword']='your passwords dont match'
         return errors
     def login_validator(self, postData):
-        
+
         return errors
 
 
@@ -37,8 +37,8 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
-    #snowBananas
-    #likedSnowBananas
+    #snowBananas dont forget the .all()
+    #likedSnowBananas dont forget the .all()
     # string that is returned when we want to view the object
     def __str__(self):
         s = '\n'
